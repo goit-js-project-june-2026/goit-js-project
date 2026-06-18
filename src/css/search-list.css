@@ -1,0 +1,20 @@
+@import url("./theme.css");
+
+@import url("./header.css");
+@import url("./hero.css");
+@import url("./catalog.css");
+@import url("./library.css");
+@import url("./upcoming.css");
+@import url("./weekly.css");
+@import url("./footer.css");
+
+@import url("./search-input.css");
+@import url("./search-list.css");
+
+@import url("./modal-details.css");
+@import url("./modal-team.css");
+@import url("./modal-trailer.css");
+
+@import url("./pagination.css");
+@import url("./loader.css");
+@import url("./scroll-to-top.css");

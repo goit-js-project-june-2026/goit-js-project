@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "prettier": "^3.3.3",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-html-inject": "^1.1.2"
   }
 }

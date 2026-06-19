@@ -13,3 +13,4 @@ import './trailer-modal.js';
 import './scroll-to-top.js';
 import './loader.js';
 import './footer.js';
+import './api.js';

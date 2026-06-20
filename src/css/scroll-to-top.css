@@ -1,0 +1,97 @@
+:root {
+  --scroll-up-color-orange: #f87719;
+  --scroll-up-color-orange-hover: #ff9340;
+  --scroll-up-color-dark-1: #111111;
+  --scroll-up-color-white: #ffffff;
+  --scroll-up-btn-size: 52px;
+  --scroll-up-btn-offset: 28px;
+  --scroll-up-shadow: 0 4px 20px rgba(248, 119, 25, 0.45);
+  --scroll-up-shadow-hover: 0 6px 28px rgba(248, 119, 25, 0.6);
+  --scroll-up-transition: 0.3s cubic-bezier(0.34, 1, 0.64, 1);
+  --scroll-up-font: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--scroll-up-color-dark-1);
+  font-family: var(--scroll-up-font);
+  color: var(--scroll-up-color-white);
+  min-height: 200vh;
+  padding: 48px 32px;
+}
+
+.preview-content {
+  max-width: 640px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.35);
+  user-select: none;
+}
+
+.preview-content p + p {
+  margin-top: 16px;
+}
+
+.scroll-up {
+  position: fixed;
+  bottom: var(--scroll-up-btn-offset);
+  right: var(--scroll-up-btn-offset);
+  z-index: 500;
+
+  width: var(--scroll-up-btn-size);
+  height: var(--scroll-up-btn-size);
+  border-radius: 50%;
+
+  background: var(--scroll-up-color-orange);
+  border: none;
+  box-shadow: var(--scroll-up-shadow);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  transition:
+    opacity var(--scroll-up-transition),
+    transform var(--scroll-up-transition),
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+
+  will-change: transform, opacity;
+}
+
+.scroll-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-up:hover {
+  background: var(--scroll-up-color-orange-hover);
+  box-shadow: var(--scroll-up-shadow-hover);
+  transform: translateY(-2px) scale(1.06);
+}
+
+.scroll-up:not(.is-visible):hover {
+  transform: translateY(12px);
+}
+
+.scroll-up:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: var(--scroll-up-shadow);
+}
+
+.scroll-up:focus-visible {
+  outline: 2px solid var(--scroll-up-color-white);
+  outline-offset: 3px;
+}

@@ -1,6 +1,4 @@
 import './theme.js';
-import './header.js';
-import './hero.js';
 import './fetchMovies.js';
 import './catalog.js';
 import './library.js';
@@ -13,4 +11,11 @@ import './trailer-modal.js';
 import './scroll-to-top.js';
 import './loader.js';
 import './footer.js';
-import './api.js';
+
+import { initHeader } from './header.js';
+import { initHero } from './hero.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  initHeader();
+  initHero();
+});

@@ -16,7 +16,7 @@
   --search-bar-input-h: 44px;
   --search-bar-submit-sz: 44px;
   --search-bar-gap: 8px;
-  --search-bar-font: "Roboto", sans-serif;
+  --search-bar-font: 'Roboto', sans-serif;
   --search-bar-fs-input: 14px;
 }
 
@@ -98,7 +98,7 @@ body {
   font-weight: 400;
   padding: 0 18px;
   outline: none;
-  -webkit-appearance: none;
+  appearance: none;
   transition: border-color 0.2s ease;
 }
 
@@ -119,7 +119,7 @@ body {
   flex: 0 0 calc(50% - var(--search-bar-gap) / 2);
 }
 
-.search-bar-input-wrap[data-field="film"] .search-bar-input {
+.search-bar-input-wrap[data-field='film'] .search-bar-input {
   padding-right: 44px;
 }
 

@@ -1,0 +1,77 @@
+/* modern normalize */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css');
+
+/* fonts */
+@font-face {
+    font-family: 'Roboto';
+    src:
+        local('Roboto Regular'),
+        local('Roboto');
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src:
+        local('Roboto Medium'),
+        local('Roboto');
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src:
+        local('Roboto Bold'),
+        local('Roboto');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+header,
+footer,
+span,
+div,
+nav,
+svg,
+img,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p {
+    box-sizing: border-box;
+    font-family: var(--font-family-base);
+    font-style: normal;
+    text-decoration: none;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--white);
+    box-sizing: border-box;
+    font-family: var(--font-family-base);
+    font-style: normal;
+    text-decoration: none;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}

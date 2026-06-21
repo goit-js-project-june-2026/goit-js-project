@@ -15,6 +15,18 @@ export async function getTrending(timeWindow = 'day') {
   return response.json();
 }
 
+export async function getUpcomingMovies() {
+  const url = `${BASE_URL}/movie/upcoming?api_key=${API_KEY}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`TMDB upcoming error: ${response.status}`);
+  }
+
+  return response.json();
+}
+
 export async function getGenres() {
   if (genreMap) return genreMap;
 
@@ -39,5 +51,5 @@ export async function getGenres() {
 export async function convertGenreIdsToNames(ids = []) {
   const genres = await getGenres();
 
-  return ids.map((id) => genres[id]).filter(Boolean);
+  return ids.map(id => genres[id]).filter(Boolean);
 }

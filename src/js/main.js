@@ -14,8 +14,10 @@ import './footer.js';
 
 import { initHeader } from './header.js';
 import { initHero } from './hero.js';
+import { initWeeklyTrends } from './weekly.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initHero();
+  initWeeklyTrends();
 });

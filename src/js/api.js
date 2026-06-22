@@ -3,28 +3,40 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 
 let genreMap = null;
 
-export async function getTrending(timeWindow = 'day') {
-  const url = `${BASE_URL}/trending/movie/${timeWindow}?api_key=${API_KEY}`;
-
+async function fetchFromTMDB(url, errorMessage = 'TMDB API error') {
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error(`TMDB API error: ${response.status}`);
+    throw new Error(`${errorMessage}: ${response.status}`);
   }
 
   return response.json();
 }
 
-export async function getUpcomingMovies() {
-  const url = `${BASE_URL}/movie/upcoming?api_key=${API_KEY}`;
+export async function getTrending(timeWindow = 'day') {
+  const url = `${BASE_URL}/trending/movie/${timeWindow}?api_key=${API_KEY}`;
 
-  const response = await fetch(url);
+  return fetchFromTMDB(url, 'TMDB trending error');
+}
 
-  if (!response.ok) {
-    throw new Error(`TMDB upcoming error: ${response.status}`);
-  }
+export async function fetchTrendingMovies(page = 1) {
+  const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`;
 
-  return response.json();
+  return fetchFromTMDB(url, 'TMDB trending movies error');
+}
+
+export async function searchMovies(query, page = 1) {
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+    query
+  )}&page=${page}`;
+
+  return fetchFromTMDB(url, 'TMDB search error');
+}
+
+export async function getUpcomingMovies(page = 1) {
+  const url = `${BASE_URL}/movie/upcoming?api_key=${API_KEY}&page=${page}`;
+
+  return fetchFromTMDB(url, 'TMDB upcoming error');
 }
 
 export async function getGenres() {
@@ -32,13 +44,7 @@ export async function getGenres() {
 
   const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
 
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`TMDB genres error: ${response.status}`);
-  }
-
-  const data = await response.json();
+  const data = await fetchFromTMDB(url, 'TMDB genres error');
 
   genreMap = data.genres.reduce((acc, genre) => {
     acc[genre.id] = genre.name;

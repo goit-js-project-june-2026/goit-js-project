@@ -23,6 +23,7 @@ const GENRES = {
 };
 
 const movieGrid = document.getElementById('movieGrid');
+const paginationContainer = document.getElementById('tui-pagination-container');
 const testForm = document.querySelector('.search-bar');
 const testInput = document.getElementById('search-film');
 const mobileSearchInput = document.getElementById('search-query');
@@ -44,17 +45,37 @@ function getPosterUrl(path) {
   return `https://image.tmdb.org/t/p/w500${path}`;
 }
 
+function clearPagination() {
+  if (paginationContainer) {
+    paginationContainer.innerHTML = '';
+  }
+}
+
+function renderEmptySearchMessage() {
+  if (!movieGrid) return;
+
+  movieGrid.className = 'cat-movie-grid cat-movie-grid--empty';
+
+  movieGrid.innerHTML = `
+    <li class="cat-movie-empty">
+      <p class="cat-movie-empty-oops">OOPS...</p>
+      <p class="cat-movie-empty-sorry">We are very sorry!</p>
+      <p class="cat-movie-empty-message">
+        We don’t have any results matching your search.
+      </p>
+    </li>
+  `;
+
+  clearPagination();
+}
+
 function renderCatalog(movies = []) {
   if (!movieGrid) return;
 
   movieGrid.className = 'cat-movie-grid';
 
   if (movies.length === 0) {
-    movieGrid.innerHTML = `
-      <li class="cat-movie-empty">
-        No movies found.
-      </li>
-    `;
+    renderEmptySearchMessage();
     return;
   }
 
@@ -78,7 +99,7 @@ function renderCatalog(movies = []) {
             alt="${movie.title || 'Movie poster'}"
             loading="lazy"
             decoding="async"
-          >
+          />
 
           <div class="cat-movie-info">
             <h3 class="cat-movie-title">${movie.title || 'Untitled'}</h3>
@@ -108,7 +129,13 @@ async function loadPage(page = 1, query = null) {
       data = await fetchTrendingMovies(page);
     }
 
-    renderCatalog(data.results);
+    const movies = data.results || [];
+
+    renderCatalog(movies);
+
+    if (movies.length === 0) {
+      return;
+    }
 
     const totalPages = Math.min(data.total_pages, 500);
 
@@ -120,12 +147,19 @@ async function loadPage(page = 1, query = null) {
     console.error('Catalog loading error:', error);
 
     if (movieGrid) {
+      movieGrid.className = 'cat-movie-grid cat-movie-grid--empty';
       movieGrid.innerHTML = `
         <li class="cat-movie-empty">
-          Something went wrong. Please try again later.
+          <p class="cat-movie-empty-oops">OOPS...</p>
+          <p class="cat-movie-empty-sorry">We are very sorry!</p>
+          <p class="cat-movie-empty-message">
+            Something went wrong. Please try again later.
+          </p>
         </li>
       `;
     }
+
+    clearPagination();
   }
 }
 

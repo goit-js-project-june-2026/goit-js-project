@@ -7,6 +7,7 @@
   --bg-dark: #fff;
   --placeholder-color: #e0e0e0;
 }
+
 .catalog-section {
   width: 100%;
   margin: 0 auto;
@@ -33,6 +34,7 @@
 .cat-movie-card:hover {
   transform: scale(1.03);
 }
+
 .cat-movie-card::after {
   content: '';
   position: absolute;
@@ -44,6 +46,7 @@
   pointer-events: none;
   z-index: 1;
 }
+
 .cat-movie-poster {
   width: 100%;
   aspect-ratio: 280 / 406;
@@ -61,6 +64,7 @@
   z-index: 2;
   color: white;
 }
+
 .cat-movie-title {
   margin: 0 0 4px 0;
   font-size: 14px;
@@ -95,6 +99,7 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
+
 .cat-movie-stars {
   display: flex;
   flex-direction: row;
@@ -102,15 +107,18 @@
   align-items: center;
   flex-shrink: 0;
 }
+
 .cat-movie-star {
   display: inline-block;
   width: 14px;
   height: 14px;
 }
+
 @media only screen and (min-width: 768px) {
   .catalog-section {
     max-width: 768px;
   }
+
   .cat-movie-grid {
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     gap: 16px;
@@ -121,7 +129,85 @@
   .catalog-section {
     max-width: 1280px;
   }
+
   .cat-movie-grid {
     gap: 32px;
+  }
+}
+
+
+.cat-movie-grid--empty {
+  display: block;
+}
+
+.cat-movie-empty {
+  width: 100%;
+  max-width: 720px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+  list-style: none;
+  text-align: center;
+  color: var(--white);
+}
+
+.cat-movie-empty-oops {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cat-movie-empty-sorry {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.cat-movie-empty-message {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+body.light-theme .cat-movie-empty {
+  color: var(--background);
+}
+
+@media only screen and (min-width: 768px) {
+  .cat-movie-empty {
+    margin-top: 64px;
+  }
+
+  .cat-movie-empty-oops {
+    font-size: 28px;
+  }
+
+  .cat-movie-empty-sorry {
+    font-size: 24px;
+  }
+
+  .cat-movie-empty-message {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .cat-movie-empty {
+    margin-top: 80px;
+  }
+
+  .cat-movie-empty-oops {
+    font-size: 32px;
+  }
+
+  .cat-movie-empty-sorry {
+    font-size: 28px;
+  }
+
+  .cat-movie-empty-message {
+    font-size: 28px;
   }
 }

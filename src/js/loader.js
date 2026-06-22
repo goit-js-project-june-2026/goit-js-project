@@ -1,10 +1,15 @@
-// TODO: Implementation
 const loaderOverlay = document.querySelector('.loader-overlay');
 
 export function showLoader() {
-  if (loaderOverlay) loaderOverlay.style.display = 'flex';
+  if (!loaderOverlay) return;
+
+  loaderOverlay.classList.remove('is-hidden');
 }
 
 export function hideLoader() {
-  if (loaderOverlay) loaderOverlay.style.display = 'none';
+  if (!loaderOverlay) return;
+
+  loaderOverlay.classList.add('is-hidden');
 }
+
+hideLoader();

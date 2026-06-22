@@ -5,15 +5,15 @@ function initYearDropdown(wrapper) {
   const valueEl = wrapper.querySelector('.search-bar-year-value');
   if (!btn || !list) return;
 
-  btn.addEventListener('click', (e) => {
+  btn.addEventListener('click', e => {
     e.stopPropagation();
     const isOpen = wrapper.classList.toggle('is-open');
     btn.setAttribute('aria-expanded', String(isOpen));
   });
 
-  list.querySelectorAll('.search-bar-year-item').forEach((item) => {
+  list.querySelectorAll('.search-bar-year-item').forEach(item => {
     item.addEventListener('click', () => {
-      list.querySelectorAll('.search-bar-year-item').forEach((i) => {
+      list.querySelectorAll('.search-bar-year-item').forEach(i => {
         i.classList.remove('search-bar-year-item--selected');
         i.removeAttribute('aria-selected');
       });
@@ -30,20 +30,24 @@ function initYearDropdown(wrapper) {
 document.querySelectorAll('.search-bar-year').forEach(initYearDropdown);
 
 document.addEventListener('click', () => {
-  document.querySelectorAll('.search-bar-year.is-open').forEach((wrapper) => {
+  document.querySelectorAll('.search-bar-year.is-open').forEach(wrapper => {
     wrapper.classList.remove('is-open');
-    wrapper.querySelector('.search-bar-year-btn').setAttribute('aria-expanded', 'false');
+    wrapper
+      .querySelector('.search-bar-year-btn')
+      .setAttribute('aria-expanded', 'false');
   });
 });
 
-document.querySelectorAll('[data-field="film"] .search-bar-input').forEach((input) => {
-  const wrap = input.closest('.search-bar-input-wrap');
-  input.addEventListener('input', () => {
-    wrap.classList.toggle('has-value', input.value.length > 0);
+document
+  .querySelectorAll('[data-field="film"] .search-bar-input')
+  .forEach(input => {
+    const wrap = input.closest('.search-bar-input-wrap');
+    input.addEventListener('input', () => {
+      wrap.classList.toggle('has-value', input.value.length > 0);
+    });
   });
-});
 
-document.querySelectorAll('.search-bar-clear').forEach((btn) => {
+document.querySelectorAll('.search-bar-clear').forEach(btn => {
   btn.addEventListener('click', () => {
     const wrap = btn.closest('.search-bar-input-wrap');
     const input = wrap.querySelector('.search-bar-input');

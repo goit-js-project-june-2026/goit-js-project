@@ -1,0 +1,60 @@
+:root {
+  --loader-color-orange: #f87719;
+  --loader-color-dark-1: #111111;
+  --loader-color-dark-2: #282828;
+  --loader-color-white: #ffffff;
+  --loader-size: 56px;
+  --loader-stroke: 4px;
+  --loader-track: rgba(248, 119, 25, 0.15);
+  --loader-overlay-bg: rgba(17, 17, 17, 0.75);
+  --loader-font: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--loader-color-dark-1);
+  font-family: var(--loader-font);
+  color: var(--loader-color-white);
+  min-height: 100vh;
+}
+
+.preview-content {
+  padding: 48px 32px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--loader-overlay-bg);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.loader {
+  width: var(--loader-size);
+  height: var(--loader-size);
+  border-radius: 50%;
+  border: var(--loader-stroke) solid var(--loader-track);
+  border-top-color: var(--loader-color-orange);
+  animation: spin 0.75s linear infinite;
+  will-change: transform;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

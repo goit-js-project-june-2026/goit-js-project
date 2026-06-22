@@ -23,9 +23,9 @@ const GENRES = {
 };
 
 const movieGrid = document.getElementById('movieGrid');
-const testForm = document.getElementById('testSearchForm');
-const testInput = document.getElementById('testSearchInput');
-
+const testForm = document.querySelector('.search-bar');
+const testInput = document.getElementById('search-film');
+const mobileSearchInput = document.getElementById('search-query');
 function getGenreNames(ids) {
   if (!ids || ids.length === 0) return 'Unknown';
 
@@ -132,7 +132,8 @@ if (testForm && testInput) {
   testForm.addEventListener('submit', e => {
     e.preventDefault();
 
-    const query = testInput.value.trim();
+    const query =
+      testInput.value.trim() || mobileSearchInput?.value.trim() || '';
 
     if (!query) {
       loadPage(1);

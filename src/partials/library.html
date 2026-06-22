@@ -1,0 +1,59 @@
+<section
+  class="library-hero js-library-hero"
+  style="position: relative; overflow: hidden; background-color: #111"
+>
+  <img
+    src="./src/img/library-hero-fixed.svg"
+    alt=""
+    aria-hidden="true"
+    style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"
+  />
+  <div class="container library-hero__container">
+    <div class="library-hero__content js-library-hero-content">
+      <h1 class="library-hero__title">Create Your Dream Cinema</h1>
+      <p class="library-hero__text">
+        Is a guide to designing a personalized movie theater experience with the right equipment,
+        customized decor, and favorite films. This guide helps you bring the cinema experience
+        into your own home with cozy seating, dim lighting, and movie theater snacks.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="library-section" aria-labelledby="library-title">
+  <div class="container library-section__container">
+    <div class="library-section__header">
+      <h2 class="visually-hidden" id="library-title">My Library</h2>
+
+      <div class="library-filter">
+        <button
+          class="library-filter__button js-library-filter-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="library-genre-menu"
+        >
+          All genres
+        </button>
+        <ul
+          class="library-filter__menu js-library-filter-menu"
+          id="library-genre-menu"
+          hidden
+        ></ul>
+      </div>
+    </div>
+
+    <div class="library-empty js-library-empty" hidden>
+      <h3>OOPS...</h3>
+      <p>We are very sorry!<br />You don't have any movies at your library.</p>
+      <a class="library-empty__link" href="./catalog.html">Search movie</a>
+    </div>
+
+    <ul class="movie-list js-library-list"></ul>
+
+    <button class="library-load-more js-library-load-more" type="button" hidden>
+      Load more
+    </button>
+  </div>
+</section>
+
+<script type="module" src="./src/js/library.js"></script>

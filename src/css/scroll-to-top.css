@@ -17,15 +17,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  background: var(--scroll-up-color-dark-1);
-  font-family: var(--scroll-up-font);
-  color: var(--scroll-up-color-white);
-  min-height: 200vh;
-  padding: 48px 32px;
-}
-
 .preview-content {
   max-width: 640px;
   font-size: 15px;
@@ -34,7 +25,7 @@ body {
   user-select: none;
 }
 
-.preview-content p + p {
+.preview-content p+p {
   margin-top: 16px;
 }
 

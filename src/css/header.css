@@ -344,3 +344,35 @@ body.light-theme .header .nav-link.active {
         justify-self: end;
     }
 }
+
+@media only screen and (max-width: 767px) {
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    body.nav-open::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background-color: rgba(0, 0, 0, 0.58);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        pointer-events: none;
+    }
+
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .mobile-nav {
+        z-index: 110;
+    }
+
+    .mobile-nav.open,
+    .mobile-nav.is-open {
+        z-index: 110;
+    }
+}

@@ -1,4 +1,3 @@
-// TODO: Implementation
 function initYearDropdown(wrapper) {
   const btn = wrapper.querySelector('.search-bar-year-btn');
   const list = wrapper.querySelector('.search-bar-year-list');

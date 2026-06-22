@@ -141,6 +141,10 @@
         aspect-ratio: 224 / 325;
     }
 
+    .weekly-title {
+        font-size: 24px;
+    }
+
 }
 
 @media screen and (min-width: 1280px) {
@@ -163,5 +167,9 @@
 
     .weekly-header {
         padding-top: 80px;
+    }
+
+    .weekly-title {
+        font-size: 28px;
     }
 }

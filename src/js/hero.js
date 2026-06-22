@@ -1,5 +1,7 @@
 import { getTrending } from './api.js';
 import { generateStarIconsMarkup } from './star-icons.js';
+import { renderMoviePopup } from './modal.js';
+import { openTrailerModal } from './trailer-modal.js';
 
 const MOBILE_TABLET_MAX_WIDTH = 1279;
 const OVERVIEW_MAX_LENGTH = 192;
@@ -25,7 +27,7 @@ export async function initHero() {
       return;
     }
 
-    const movies = data.results.filter((movie) => movie.backdrop_path);
+    const movies = data.results.filter(movie => movie.backdrop_path);
 
     if (movies.length === 0) {
       currentHeroMovie = null;
@@ -94,12 +96,13 @@ function renderHero(movie) {
   if (!hero) return;
 
   const image = getBackdropImageUrl(movie.backdrop_path);
+  const title = movie.title || movie.name || 'Movie';
 
   hero.innerHTML = `
     <img
       class="hero-bg"
       src="${image}"
-      alt="${movie.title || movie.name || 'Movie background'}"
+      alt="${title} background"
       fetchpriority="high"
       decoding="async"
       width="1280"
@@ -109,7 +112,7 @@ function renderHero(movie) {
     <div class="hero-overlay">
       <div class="container">
         <div class="hero-content">
-          <h1 class="hero-title">${movie.title || movie.name || 'Movie'}</h1>
+          <h1 class="hero-title">${title}</h1>
 
           ${renderRating(movie.vote_average)}
 
@@ -118,8 +121,13 @@ function renderHero(movie) {
           </p>
 
           <div class="hero-actions">
-            <button class="btn btn-primary" type="button">Watch trailer</button>
-            <button class="btn btn-secondary" type="button">More details</button>
+            <button class="btn btn-primary" type="button" data-trailer-id="${movie.id}">
+              Watch trailer
+            </button>
+
+            <button class="btn btn-secondary" type="button" data-movie-id="${movie.id}">
+              More details
+            </button>
           </div>
         </div>
       </div>
@@ -144,6 +152,7 @@ function renderFallbackHero() {
     <picture class="hero-bg-picture">
       <source media="(min-width: 1280px)" srcset="${desktop} 1x, ${desktop2x} 2x" />
       <source media="(min-width: 768px)" srcset="${tablet} 1x, ${tablet2x} 2x" />
+
       <img
         class="hero-bg"
         src="${mobile}"
@@ -190,16 +199,18 @@ function renderRating(voteAverage) {
 
 function attachHeroEvents(movie) {
   const hero = document.getElementById('hero');
-  if (!hero) return;
+  if (!hero || !movie?.id) return;
 
-  const trailerButton = hero.querySelector('.btn-primary');
-  const detailsButton = hero.querySelector('.btn-secondary');
+  const trailerButton = hero.querySelector('[data-trailer-id]');
+  const detailsButton = hero.querySelector('[data-movie-id]');
 
-  trailerButton?.addEventListener('click', () => {
-    console.log('Watch trailer movie id:', movie.id);
+  trailerButton?.addEventListener('click', event => {
+    event.preventDefault();
+    openTrailerModal(movie.id);
   });
 
-  detailsButton?.addEventListener('click', () => {
-    console.log('More details movie id:', movie.id);
+  detailsButton?.addEventListener('click', event => {
+    event.preventDefault();
+    renderMoviePopup(movie.id);
   });
 }

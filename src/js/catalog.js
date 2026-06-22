@@ -1,4 +1,4 @@
-import { generateStarIconsMarkup } from './star-icons';
+import { generateStarIconsMarkup } from './star-icons.js';
 import { fetchTrendingMovies, searchMovies } from './api.js';
 import { renderCustomPagination } from './pagination.js';
 
@@ -26,6 +26,7 @@ const movieGrid = document.getElementById('movieGrid');
 const testForm = document.querySelector('.search-bar');
 const testInput = document.getElementById('search-film');
 const mobileSearchInput = document.getElementById('search-query');
+
 function getGenreNames(ids) {
   if (!ids || ids.length === 0) return 'Unknown';
 
@@ -60,19 +61,23 @@ function renderCatalog(movies = []) {
   movieGrid.innerHTML = movies
     .map(movie => {
       const year = movie.release_date ? movie.release_date.slice(0, 4) : 'N/A';
+
       const stars = generateStarIconsMarkup(
         movie.vote_average,
         'cat-movie-star'
       );
+
       const genres = getGenreNames(movie.genre_ids);
       const posterUrl = getPosterUrl(movie.poster_path);
 
       return `
-        <li class="cat-movie-card">
+        <li class="cat-movie-card" data-movie-id="${movie.id}">
           <img
             class="cat-movie-poster"
             src="${posterUrl}"
             alt="${movie.title || 'Movie poster'}"
+            loading="lazy"
+            decoding="async"
           >
 
           <div class="cat-movie-info">
@@ -125,6 +130,7 @@ async function loadPage(page = 1, query = null) {
 }
 
 function initCatalog() {
+  if (!movieGrid) return;
   loadPage(1);
 }
 

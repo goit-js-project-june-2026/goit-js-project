@@ -42,7 +42,7 @@
 
 .upcoming__image {
     overflow: hidden;
-    border-radius: 16px;
+    border-radius: 5px;
     background: #111;
     min-height: 240px;
 }

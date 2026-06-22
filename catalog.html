@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinemania — Catalog</title>
+    <script type="module" crossorigin src="/goit-js-project/assets/main-Fvx2pcyi.js"></script>
+    <link rel="stylesheet" crossorigin href="/goit-js-project/assets/main-tUaguRfn.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-project/assets/catalog-BujzqkZa.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-project/assets/pagination-BJC7i--w.css">
+  </head>
+  <body>
+    <header id="header" class="header" data-dev="Header Section">
+  <div class="container">
+    <div class="header-inner">
+      <a href="./index.html" class="header-logo logo-link">
+        <img
+          src="/goit-js-project/assets/logo-PQe6D84w.svg"
+          alt="Cinemania"
+          class="nav-logo"
+          width="45"
+          height="36"
+          decoding="async"
+        />
+        <span class="logo-text">Cinemania</span>
+      </a>
+
+      <nav class="header-nav desktop-nav">
+        <a href="./index.html" class="nav-link" data-page="home">HOME</a>
+        <a href="./catalog.html" class="nav-link" data-page="catalog"
+          >CATALOG</a
+        >
+        <a href="./mylibrary.html" class="nav-link" data-page="library"
+          >MY LIBRARY</a
+        >
+      </nav>
+
+      <nav class="mobile-nav">
+        <div class="mobile-menu-logo">
+          <a href="./index.html" class="logo-link">
+            <img
+              src="/goit-js-project/assets/logo-PQe6D84w.svg"
+              alt="Cinemania"
+              class="nav-logo"
+              width="45"
+              height="36"
+              decoding="async"
+            />
+            <span class="logo-text">Cinemania</span>
+          </a>
+        </div>
+
+        <a href="./index.html" class="nav-link" data-page="home">HOME</a>
+        <a href="./catalog.html" class="nav-link" data-page="catalog"
+          >CATALOG</a
+        >
+        <a href="./mylibrary.html" class="nav-link" data-page="library"
+          >MY LIBRARY</a
+        >
+      </nav>
+
+      <button class="header-menu-btn" id="menuToggle" type="button">
+        MENU
+      </button>
+
+      <div class="header-controls">
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="toggle-track">
+            <svg class="icon moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M20.5 16.5C18.8 20.1 14.6 21.8 10.9 20.1C7.1 18.4 5.5 13.9 7.2 10.1C8.2 7.8 10.2 6.3 12.5 5.8C11.1 8.7 12.3 12.3 15.2 13.7C16.8 14.5 18.7 14.5 20.3 13.8C20.7 14.7 20.8 15.6 20.5 16.5Z"
+              />
+            </svg>
+
+            <svg class="icon sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" />
+              <path
+                d="M12 3.2V5.2M12 18.8V20.8M3.2 12H5.2M18.8 12H20.8M5.8 5.8L7.2 7.2M16.8 16.8L18.2 18.2M18.2 5.8L16.8 7.2M7.2 16.8L5.8 18.2"
+              />
+            </svg>
+
+            <span class="toggle-thumb"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <main>
+      <section id="hero" class="hero">
+  <div class="hero-overlay">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title"></h1>
+
+        <div class="hero-rating"></div>
+
+        <p class="hero-overview"></p>
+
+        <div class="hero-actions"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Bar — Cinemania</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="search-input.css" />
+  </head>
+  <body>
+    <div class="preview-page">
+      <form class="search-bar" role="search" novalidate>
+        <div class="search-bar-input-wrap" data-field="film">
+          <label for="search-film" class="visually-hidden"
+            >Search by film title</label
+          >
+          <input
+            type="text"
+            id="search-film"
+            name="film"
+            class="search-bar-input"
+            placeholder="Film"
+            autocomplete="off"
+          />
+
+          <button
+            type="button"
+            class="search-bar-clear"
+            aria-label="Clear film input"
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 1L9 9M9 1L1 9"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="search-bar-year" data-field="year">
+          <button
+            type="button"
+            class="search-bar-year-btn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-controls="year-listbox"
+            aria-label="Filter by year"
+          >
+            <span class="search-bar-year-value">Year</span>
+            <svg
+              class="search-bar-chevron"
+              width="12"
+              height="7"
+              viewBox="0 0 12 7"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 1L6 6L11 1"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          <ul
+            id="year-listbox"
+            class="search-bar-year-list"
+            role="listbox"
+            aria-label="Select year"
+          >
+            <li class="search-bar-year-item" role="option" data-value="2023">
+              2023
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2022">
+              2022
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2021">
+              2021
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2020">
+              2020
+            </li>
+
+            <li
+              class="search-bar-year-item search-bar-year-item--selected"
+              role="option"
+              data-value="2019"
+              aria-selected="true"
+            >
+              2019
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2018">
+              2018
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2017">
+              2017
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2016">
+              2016
+            </li>
+            <li class="search-bar-year-item" role="option" data-value="2015">
+              2015
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="search-bar-input-wrap search-bar-input-wrap--mobile-only"
+          data-field="search"
+        >
+          <label for="search-query" class="visually-hidden">Search</label>
+          <input
+            type="text"
+            id="search-query"
+            name="query"
+            class="search-bar-input"
+            placeholder="Search"
+            autocomplete="off"
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="search-bar-submit"
+          aria-label="Submit search"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle
+              cx="8.5"
+              cy="8.5"
+              r="6.5"
+              stroke="white"
+              stroke-width="1.8"
+            />
+            <path
+              d="M13.5 13.5L18.5 18.5"
+              stroke="white"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </form>
+
+      <div
+        class="no-results is-hidden"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <p class="no-results-oops">OOPS...</p>
+        <p class="no-results-sorry">We are very sorry!</p>
+        <p class="no-results-msg">
+          We don't have any results matching your search.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
+      
+      <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <section class="catalog-section">
+        <ul id="movieGrid"></ul>
+        <div id="tui-pagination-container" class="tui-pagination"></div>
+    </section>
+
+</body>
+
+</html>
+<div id="tui-pagination-container" class="tui-pagination"></div>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <p class="footer-copy">
+      &copy; 2026 | All Rights Reserved | Developed with
+      <img
+        src="data:image/svg+xml,%3csvg%20width='14'%20height='13'%20viewBox='0%200%2014%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M7%2012.88L6.02%2011.9C2.38%208.68%200%206.51%200%203.85C0%201.68%201.68%200%203.85%200C5.04%200%206.23%200.56%207%201.47C7.77%200.56%208.96%200%2010.15%200C12.32%200%2014%201.68%2014%203.85C14%206.51%2011.62%208.68%207.98%2011.9L7%2012.88Z'%20fill='%23F87719'/%3e%3c/svg%3e"
+        alt="love"
+        class="footer-favorite"
+        width="14"
+        height="14"
+        decoding="async"
+      />
+      by
+      <button class="footer-team-btn" id="openTeamModal" type="button">
+        GoIT Students
+      </button>
+    </p>
+  </div>
+
+  <div class="modal-overlay hidden" id="teamModalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="closeTeamModal" type="button">✕</button>
+
+      <h2 class="modal-title">Cinemania Project Team</h2>
+      <p class="modal-subtitle">
+        The creative minds behind the Cinemania Project
+      </p>
+
+      <ul class="team-list">
+        <li class="team-card">
+          <img
+            class="team-card-avatar"
+            src="https://github.com/leogos.png"
+            alt="Ali Leo Olsen Avatar"
+            loading="lazy"
+          />
+
+          <div class="team-card-info">
+            <h3 class="team-card-name">Ali Leo Olsen</h3>
+            <p class="team-card-role">Team Leader | Developer</p>
+
+            <div class="team-card-links">
+              <a
+                href="https://github.com/leogos"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-card-link"
+              >
+                [GitHub]
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="team-card">
+          <img
+            class="team-card-avatar"
+            src="https://github.com/halildirem.png"
+            alt="Halil Direm Avatar"
+            loading="lazy"
+          />
+
+          <div class="team-card-info">
+            <h3 class="team-card-name">Halil Direm</h3>
+            <p class="team-card-role">Scrum Master | Developer</p>
+
+            <div class="team-card-links">
+              <a
+                href="https://github.com/halildirem"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-card-link"
+              >
+                [GitHub]
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="team-card">
+          <img
+            class="team-card-avatar"
+            src="https://github.com/ebruhz.png"
+            alt="Ebru Hızlı Avatar"
+            loading="lazy"
+          />
+
+          <div class="team-card-info">
+            <h3 class="team-card-name">Ebru Hızlı</h3>
+            <p class="team-card-role">Member | Developer</p>
+
+            <div class="team-card-links">
+              <a
+                href="https://github.com/ebruhz"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-card-link"
+              >
+                [GitHub]
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="team-card">
+          <img
+            class="team-card-avatar"
+            src="https://github.com/betlllgemi.png"
+            alt="Betül Gemi Avatar"
+            loading="lazy"
+          />
+
+          <div class="team-card-info">
+            <h3 class="team-card-name">Betül Gemi</h3>
+            <p class="team-card-role">Member | Developer</p>
+
+            <div class="team-card-links">
+              <a
+                href="https://github.com/betlllgemi"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="team-card-link"
+              >
+                [GitHub]
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+    <div class="movie-modal is-hidden" data-movie-modal>
+  <div class="movie-modal__overlay" data-movie-modal-overlay></div>
+
+  <div
+    class="movie-modal__window"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="movie-modal-title"
+  >
+    <button
+      class="movie-modal__close"
+      type="button"
+      aria-label="Close modal"
+      data-movie-modal-close
+    >
+      x
+    </button>
+
+    <div class="movie-modal__content" data-movie-modal-content>
+      <p class="movie-modal__loading">Loading...</p>
+    </div>
+  </div>
+</div>
+
+    <div class="trailer-modal is-hidden" data-trailer-modal>
+  <div class="trailer-modal__overlay" data-trailer-overlay></div>
+
+  <div class="trailer-modal__window" role="dialog" aria-modal="true" aria-label="Movie trailer">
+    <button
+      class="trailer-modal__close"
+      type="button"
+      aria-label="Close trailer"
+      data-trailer-close
+    >
+      x
+    </button>
+
+    <div class="trailer-modal__player">
+      <p class="trailer-modal__status" data-trailer-status>Loading trailer...</p>
+      <div class="trailer-modal__error" data-trailer-error hidden>
+        <div class="trailer-modal__error-copy">
+          <h2>OOPS...</h2>
+          <p>We are very sorry!</p>
+          <p>But we couldn't find the trailer.</p>
+        </div>
+        <img
+          class="trailer-modal__error-image"
+          src="/goit-js-project/assets/trailer-not-found-BstZulyb.png"
+          alt="Cinema clapperboard, film reel and 3D glasses"
+        />
+      </div>
+      <iframe
+        class="trailer-modal__frame"
+        data-trailer-frame
+        title="Movie trailer"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+        hidden
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+    <div class="loader-overlay" role="status" aria-label="Loading, please wait">
+  <div class="loader" aria-hidden="true"></div>
+</div>
+
+    <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll-up Button — Cinemania</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="scroll-to-top.css" />
+  </head>
+
+  <body>
+    
+    <button
+      type="button"
+      class="scroll-up is-visible"
+      aria-label="Scroll back to top"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 13L10 7L16 13"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </body>
+</html>
+
+  </body>
+</html>

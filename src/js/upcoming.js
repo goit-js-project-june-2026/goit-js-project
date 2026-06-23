@@ -1,6 +1,6 @@
 import { getUpcomingMovies, convertGenreIdsToNames } from './api.js';
 
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 const LIBRARY_KEY = 'my-library';
 
 const refs = {
@@ -32,7 +32,7 @@ function isMovieInLibrary(id) {
 }
 
 function updateButtonText() {
-  if (!currentMovie) return;
+  if (!currentMovie || !refs.button) return;
 
   refs.button.textContent = isMovieInLibrary(currentMovie.id)
     ? 'Remove from My Library'
@@ -79,12 +79,16 @@ function getRandomMovie(movies) {
 }
 
 function showStatus(message) {
+  if (!refs.status || !refs.wrapper) return;
+
   refs.status.textContent = message;
   refs.status.classList.remove('is-hidden');
   refs.wrapper.classList.add('is-hidden');
 }
 
 function hideStatus() {
+  if (!refs.status || !refs.wrapper) return;
+
   refs.status.classList.add('is-hidden');
   refs.wrapper.classList.remove('is-hidden');
 }
@@ -93,14 +97,17 @@ function formatVote(movie) {
   const voteAverage = movie.vote_average
     ? movie.vote_average.toFixed(1)
     : '0.0';
-
   const voteCount = movie.vote_count || 0;
 
-  return `
-    <span class="vote-pill">${voteAverage}</span>
-    <span class="vote-separator">/</span>
-    <span class="vote-pill">${voteCount}</span>
-  `;
+  return ` ${voteAverage} / ${voteCount} `;
+}
+
+function getUpcomingImageUrl(backdropPath, size = 'w780') {
+  if (!backdropPath) {
+    return './src/img/no-poster.png';
+  }
+
+  return `${IMAGE_BASE_URL}/${size}${backdropPath}`;
 }
 
 async function renderUpcomingMovie(movie) {
@@ -111,11 +118,19 @@ async function renderUpcomingMovie(movie) {
     genres,
   };
 
-  refs.image.src = movie.backdrop_path
-    ? `${IMAGE_BASE_URL}${movie.backdrop_path}`
-    : './img/no-poster.png';
-
-  refs.image.alt = movie.title || 'movie backdrop';
+  if (refs.image) {
+    refs.image.src = getUpcomingImageUrl(movie.backdrop_path, 'w780');
+    refs.image.srcset = `
+      ${getUpcomingImageUrl(movie.backdrop_path, 'w500')} 500w,
+      ${getUpcomingImageUrl(movie.backdrop_path, 'w780')} 780w,
+      ${getUpcomingImageUrl(movie.backdrop_path, 'w1280')} 1280w
+    `;
+    refs.image.sizes =
+      '(max-width: 767px) 280px, (max-width: 1279px) 704px, 805px';
+    refs.image.alt = movie.title || 'movie backdrop';
+    refs.image.loading = 'lazy';
+    refs.image.decoding = 'async';
+  }
 
   refs.title.textContent = movie.title || 'Unknown title';
   refs.date.textContent = movie.release_date || 'Unknown';
@@ -144,9 +159,12 @@ export async function initUpcoming() {
     }
 
     const randomMovie = getRandomMovie(thisMonthMovies);
+
     await renderUpcomingMovie(randomMovie);
 
-    refs.button.addEventListener('click', toggleLibrary);
+    if (refs.button) {
+      refs.button.addEventListener('click', toggleLibrary);
+    }
   } catch (error) {
     console.error('Upcoming error:', error);
     showStatus('No upcoming movie is available right now.');

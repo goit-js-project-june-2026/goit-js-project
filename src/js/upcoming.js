@@ -102,7 +102,7 @@ function formatVote(movie) {
   return ` ${voteAverage} / ${voteCount} `;
 }
 
-function getUpcomingImageUrl(backdropPath, size = 'w780') {
+function getUpcomingImageUrl(backdropPath, size = 'w500') {
   if (!backdropPath) {
     return './src/img/no-poster.png';
   }
@@ -119,27 +119,48 @@ async function renderUpcomingMovie(movie) {
   };
 
   if (refs.image) {
-    refs.image.src = getUpcomingImageUrl(movie.backdrop_path, 'w780');
+    refs.image.src = getUpcomingImageUrl(movie.backdrop_path, 'w500');
+
     refs.image.srcset = `
       ${getUpcomingImageUrl(movie.backdrop_path, 'w500')} 500w,
       ${getUpcomingImageUrl(movie.backdrop_path, 'w780')} 780w,
       ${getUpcomingImageUrl(movie.backdrop_path, 'w1280')} 1280w
     `;
+
     refs.image.sizes =
       '(max-width: 767px) 280px, (max-width: 1279px) 704px, 805px';
+
     refs.image.alt = movie.title || 'movie backdrop';
-    refs.image.loading = 'lazy';
+    refs.image.loading = 'eager';
     refs.image.decoding = 'async';
+    refs.image.fetchPriority = 'high';
   }
 
-  refs.title.textContent = movie.title || 'Unknown title';
-  refs.date.textContent = movie.release_date || 'Unknown';
-  refs.vote.innerHTML = formatVote(movie);
-  refs.popularity.textContent = movie.popularity
-    ? movie.popularity.toFixed(1)
-    : '0.0';
-  refs.genre.textContent = genres.length ? genres.join(', ') : 'Unknown';
-  refs.overview.textContent = movie.overview || 'No overview available.';
+  if (refs.title) {
+    refs.title.textContent = movie.title || 'Unknown title';
+  }
+
+  if (refs.date) {
+    refs.date.textContent = movie.release_date || 'Unknown';
+  }
+
+  if (refs.vote) {
+    refs.vote.innerHTML = formatVote(movie);
+  }
+
+  if (refs.popularity) {
+    refs.popularity.textContent = movie.popularity
+      ? movie.popularity.toFixed(1)
+      : '0.0';
+  }
+
+  if (refs.genre) {
+    refs.genre.textContent = genres.length ? genres.join(', ') : 'Unknown';
+  }
+
+  if (refs.overview) {
+    refs.overview.textContent = movie.overview || 'No overview available.';
+  }
 
   updateButtonText();
   hideStatus();

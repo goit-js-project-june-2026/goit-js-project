@@ -27,6 +27,7 @@ const paginationContainer = document.getElementById('tui-pagination-container');
 const testForm = document.querySelector('.search-bar');
 const testInput = document.getElementById('search-film');
 const mobileSearchInput = document.getElementById('search-query');
+const yearValue = document.querySelector('.search-bar-year-value');
 
 function getGenreNames(ids) {
   if (!ids || ids.length === 0) return 'Unknown';
@@ -57,12 +58,10 @@ function renderEmptySearchMessage() {
   movieGrid.className = 'cat-movie-grid cat-movie-grid--empty';
 
   movieGrid.innerHTML = `
-    <li class="cat-movie-empty">
-      <p class="cat-movie-empty-oops">OOPS...</p>
-      <p class="cat-movie-empty-sorry">We are very sorry!</p>
-      <p class="cat-movie-empty-message">
-        We don’t have any results matching your search.
-      </p>
+    <li class="cat-empty-message">
+      <h2>OOPS...</h2>
+      <p>We are very sorry!</p>
+      <p>We don’t have any results matching your search.</p>
     </li>
   `;
 
@@ -82,36 +81,25 @@ function renderCatalog(movies = []) {
   movieGrid.innerHTML = movies
     .map(movie => {
       const year = movie.release_date ? movie.release_date.slice(0, 4) : 'N/A';
-
       const stars = generateStarIconsMarkup(
         movie.vote_average,
         'cat-movie-star'
       );
-
       const genres = getGenreNames(movie.genre_ids);
       const posterUrl = getPosterUrl(movie.poster_path);
 
       return `
-        <li class="cat-movie-card" data-movie-id="${movie.id}">
+        <li class="cat-movie-card">
           <img
             class="cat-movie-poster"
             src="${posterUrl}"
             alt="${movie.title || 'Movie poster'}"
             loading="lazy"
-            decoding="async"
           />
-
           <div class="cat-movie-info">
             <h3 class="cat-movie-title">${movie.title || 'Untitled'}</h3>
-
-            <div class="cat-movie-meta">
-              <div class="cat-movie-text">
-                <span class="cat-movie-genre">${genres}</span>
-                <span class="cat-movie-year"> | ${year}</span>
-              </div>
-
-              <div class="cat-movie-stars">${stars}</div>
-            </div>
+            <p class="cat-movie-meta">${genres} | ${year}</p>
+            <div class="cat-movie-rating">${stars}</div>
           </div>
         </li>
       `;
@@ -119,12 +107,12 @@ function renderCatalog(movies = []) {
     .join('');
 }
 
-async function loadPage(page = 1, query = null) {
+async function loadPage(page = 1, query = null, year = '') {
   try {
     let data;
 
     if (query) {
-      data = await searchMovies(query, page);
+      data = await searchMovies(query, page, year);
     } else {
       data = await fetchTrendingMovies(page);
     }
@@ -140,7 +128,7 @@ async function loadPage(page = 1, query = null) {
     const totalPages = Math.min(data.total_pages, 500);
 
     renderCustomPagination(page, totalPages, newPage => {
-      loadPage(newPage, query);
+      loadPage(newPage, query, year);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   } catch (error) {
@@ -148,13 +136,12 @@ async function loadPage(page = 1, query = null) {
 
     if (movieGrid) {
       movieGrid.className = 'cat-movie-grid cat-movie-grid--empty';
+
       movieGrid.innerHTML = `
-        <li class="cat-movie-empty">
-          <p class="cat-movie-empty-oops">OOPS...</p>
-          <p class="cat-movie-empty-sorry">We are very sorry!</p>
-          <p class="cat-movie-empty-message">
-            Something went wrong. Please try again later.
-          </p>
+        <li class="cat-empty-message">
+          <h2>OOPS...</h2>
+          <p>We are very sorry!</p>
+          <p>Something went wrong. Please try again later.</p>
         </li>
       `;
     }
@@ -165,6 +152,7 @@ async function loadPage(page = 1, query = null) {
 
 function initCatalog() {
   if (!movieGrid) return;
+
   loadPage(1);
 }
 
@@ -174,13 +162,15 @@ if (testForm && testInput) {
 
     const query =
       testInput.value.trim() || mobileSearchInput?.value.trim() || '';
+    const year = yearValue?.textContent.trim();
+    const selectedYear = year && year !== 'Year' ? year : '';
 
     if (!query) {
       loadPage(1);
       return;
     }
 
-    loadPage(1, query);
+    loadPage(1, query, selectedYear);
   });
 }
 

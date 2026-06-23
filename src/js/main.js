@@ -1,5 +1,4 @@
 import './theme.js';
-import './fetchMovies.js';
 import './catalog.js';
 import './library.js';
 import './search.js';

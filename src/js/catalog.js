@@ -40,7 +40,7 @@ function getGenreNames(ids) {
 
 function getPosterUrl(path) {
   if (!path) {
-    return '';
+    return './src/img/no-poster.png';
   }
 
   return `https://image.tmdb.org/t/p/w500${path}`;
@@ -89,7 +89,12 @@ function renderCatalog(movies = []) {
       const posterUrl = getPosterUrl(movie.poster_path);
 
       return `
-        <li class="cat-movie-card">
+        <li
+          class="cat-movie-card"
+          data-movie-id="${movie.id}"
+          role="button"
+          tabindex="0"
+        >
           <img
             class="cat-movie-poster"
             src="${posterUrl}"
@@ -171,6 +176,19 @@ if (testForm && testInput) {
     }
 
     loadPage(1, query, selectedYear);
+  });
+}
+
+if (movieGrid) {
+  movieGrid.addEventListener('keydown', event => {
+    const movieCard = event.target.closest('[data-movie-id]');
+
+    if (!movieCard) return;
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      movieCard.click();
+    }
   });
 }
 
